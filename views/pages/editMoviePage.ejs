@@ -1,0 +1,151 @@
+<%- include('../partials/header') %>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Form Basic</h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+           <div class="row">
+    <div class="col-md-6">
+        <div class="card">
+
+            <form class="form-horizontal"
+                  method="POST"
+                  action="/admin/editMovie/<%= movie._id %>"
+                  enctype="multipart/form-data">
+
+                <div class="card-body">
+                    <h4 class="card-title">Personal Info</h4>
+
+                    <!-- Movie Title -->
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">
+                            Movie Title
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text"
+                                   name="title"
+                                   class="form-control"
+                                   value="<%= movie.title %>"
+                                   placeholder="Movie Title">
+                        </div>
+                    </div>
+
+                    <!-- Rating (Same As Yours) -->
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">
+                            Rating
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-select" name="rating" required>
+                                <option value="">Select Rating</option>
+                                <option value="1">⭐</option>
+                                <option value="2">⭐⭐</option>
+                                <option value="3">⭐⭐⭐</option>
+                                <option value="4">⭐⭐⭐⭐</option>
+                                <option value="5">⭐⭐⭐⭐⭐</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Image Section -->
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">
+                            Add Image
+                        </label>
+
+                        <div class="col-sm-9">
+
+                            <!-- Old Image Show -->
+                            <div class="mb-2">
+                                <img src="/uploads/<%= movie.image %>"
+                                     width="80">
+                            </div>
+
+                            <!-- File Input (FIXED) -->
+                            <input type="file"
+                                   name="image"
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- About -->
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">
+                            About
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control"
+                                      name="about"><%= movie.about %></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="border-top">
+                    <div class="card-body">
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        <!-- editor -->
+
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+
+    <%- include('../partials/footer') %>

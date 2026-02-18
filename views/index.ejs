@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineNest · Latest Movies</title>
+    <!-- Bootstrap 5 CSS (light version) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 (free) for subtle icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- custom styles -->
+    <style>
+        body {
+            background: #0f0f0f;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+       
+        html {
+            scroll-behavior: smooth;
+        }
+      
+        .navbar-custom {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #f5c518 !important;
+            font-size: 1.8rem;
+            text-shadow: 0 0 5px #ffd966;
+        }
+        .nav-link {
+            color: #e0e0e0 !important;
+            font-weight: 500;
+            margin: 0 5px;
+            transition: 0.2s;
+            border-radius: 30px;
+            padding: 8px 16px !important;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(245, 197, 24, 0.15);
+            color: #f5c518 !important;
+        }
+     
+        .section-title {
+            color: #f5c518;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: #f5c518;
+            border-radius: 2px;
+        }
+  
+        .movie-card {
+            background: #1a1a1a;
+            border: 1px solid #2c2c2c;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        .movie-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 30px rgba(245, 197, 24, 0.12);
+            border-color: #f5c51840;
+        }
+        .movie-img {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+        }
+        
+        .movie-badge {
+            background: #f5c518;
+            color: #0f0f0f;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 8px black;
+        }
+        .card-body {
+            padding: 1rem 1.2rem 1.2rem;
+        }
+        .movie-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        .movie-meta {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .movie-meta i {
+            color: #f5c518;
+            width: 18px;
+        }
+        .footer {
+            background: #0a0a0a;
+            color: #aaa;
+            border-top: 1px solid #222;
+            padding: 30px 0 20px;
+        }
+        .footer a {
+            color: #f5c518;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .cast-row .col {
+            min-width: 160px; 
+        }
+        
+        @media (max-width: 576px) {
+            .movie-img { height: 220px; }
+            .navbar-brand { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+  
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-2 px-3 px-md-5">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-film me-2" style="color: #f5c518;"></i>CineNest</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin" target="_blank"><i class="fas fa-fire me-1"></i>Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#castcards"><i class="fas fa-star me-1"></i>Cast & Crew</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer"><i class="fas fa-address-card me-1"></i>Contact</a>
+                    </li>
+                    <!-- subtle search / extra link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main container -->
+    <div class="container-fluid px-3 px-md-5 py-4">
+
+        <!-- mini hero / welcome (optional, keeps layout fresh) -->
+        <div class="row my-3">
+            <div class="col-12">
+                <div class="p-4 rounded-4" style="background: linear-gradient(145deg, #1e1e1e, #131313); border-left: 6px solid #f5c518;">
+                    <h2 class="text-white fw-semibold mb-1"><span style="color: #f5c518;">Stream</span> the latest buzz</h2>
+                    <p class="text-secondary">Top 5 movies this week · exclusive curated list</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LATEST 5 MOVIES SECTION (exactly 5 cards in a responsive row) -->
+        <section id="latest" class="my-5">
+            <h2 class="section-title"><i class="fas fa-arrow-right me-2"></i>Latest 5 Movies</h2>
+        <div class="row g-4">
+
+    <% movies.forEach(movie => { %>
+
+        <div class="col-md-6 col-lg-4 col-xl-2-4 col-xxl-2-4">
+            <div class="movie-card">
+
+                <div class="movie-img"
+                     style="background-image: linear-gradient(0deg, #0f0f0f 0%, transparent 50%), 
+                     url('/uploads/<%= movie.image %>');">
+
+                    <span class="movie-badge ms-auto">
+                        <i class="far fa-clock me-1"></i>
+                        <%= movie.year || "2025" %>
+                    </span>
+                </div>
+
+                <div class="card-body">
+                    <div class="movie-title">
+                        <%= movie.title %>
+                    </div>
+
+                    <div class="movie-meta">
+                        <i class="fas fa-star"></i>
+                        <%= movie.rating %>
+                    </div>
+
+                    <p class="text-secondary small mt-2 mb-0">
+                        <%= movie.about %>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    <% }) %>
+
+</div>
+
+            <!-- note: custom grid for 5 cards per row on large screens using .col-xl-2-4 (width:20%) -->
+        </section>
+
+        <!-- MOVIE CAST CARDS (4 per row) + extra line as per requirement "movie ke ca[e]rsds ho eh row me 4" -->
+        <section id="castcards" class="my-5 pt-3">
+            <h2 class="section-title"><i class="fas fa-user-stars me-2"></i>Featured Cast</h2>
+            <!-- first row: exactly 4 cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/1005/400/300');">
+                            <span class="movie-badge ms-auto"><i class="fas fa-camera"></i> lead</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Alia Bhat</div>
+                            <div class="movie-meta"><i class="fas fa-mask"></i> Actress · Mirage</div>
+                            <div class="d-flex mt-2 text-warning">
+                                <i class="fas fa-star me-1"></i><i class="fas fa-star me-1"></i><i class="fas fa-star me-1"></i><i class="fas fa-star me-1"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/104/400/300');">
+                            <span class="movie-badge ms-auto">director</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Raj & DK</div>
+                            <div class="movie-meta"><i class="fas fa-clapperboard"></i> Director duo</div>
+                            <div class="text-secondary small">Shadow Protocol, The Family</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/102/400/300');">
+                            <span class="movie-badge ms-auto">star</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Vijay Sethupathi</div>
+                            <div class="movie-meta"><i class="fas fa-ticket"></i> Actor · Rebel Hearts</div>
+                            <div class="text-secondary small">critic’s choice</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/106/400/300');">
+                            <span class="movie-badge ms-auto">music</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">A.R. Rehman</div>
+                            <div class="movie-meta"><i class="fas fa-music"></i> Composer</div>
+                            <div class="text-secondary small">The Last Note soundtrack</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/1011/400/300');">
+                            <span class="movie-badge ms-auto">cinema</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Kiran Rao</div>
+                            <div class="movie-meta"><i class="fas fa-video"></i> Producer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/1012/400/300');">
+                            <span class="movie-badge ms-auto">writer</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Javed Akhtar</div>
+                            <div class="movie-meta"><i class="fas fa-feather"></i> Lyricist</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/1084/400/300');">
+                            <span class="movie-badge ms-auto">cast</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Nayanthara</div>
+                            <div class="movie-meta"><i class="fas fa-crown"></i> Actress</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="movie-card d-flex flex-column" style="background: #161616;">
+                        <div class="movie-img" style="height: 220px; background-image: url('https://picsum.photos/id/1015/400/300');">
+                            <span class="movie-badge ms-auto">action</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="movie-title">Yash</div>
+                            <div class="movie-meta"><i class="fas fa-dragon"></i> Action hero</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-muted mt-4 mb-0 small"><i class="fas fa-chevron-circle-right me-1"></i> more than 20+ cast profiles ...</p>
+        </section>
+    </div> 
+    <footer id="footer" class="footer text-center text-md-start">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-md-5">
+                    <h4 class="text-light fw-semibold mb-2"><i class="fas fa-film me-2" style="color: #f5c518;"></i>CineNest</h4>
+                    <p class="small text-secondary">Your daily dose of silver screen. Latest 5 movies, cast interviews and exclusive footages.</p>
+                </div>
+                <div class="col-md-3 offset-md-1">
+                    <h6 class="text-white">Explore</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-secondary text-decoration-none">About us</a></li>
+                        <li><a href="#latest" class="text-secondary text-decoration-none">Latest 5</a></li>
+                        <li><a href="#castcards" class="text-secondary text-decoration-none">Cast</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Coming soon</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-white">Connect</h6>
+                    <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-5">
+                        <a href="#"><i class="fab fa-instagram" style="color: #f5c518;"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter" style="color: #f5c518;"></i></a>
+                        <a href="#"><i class="fab fa-youtube" style="color: #f5c518;"></i></a>
+                        <a href="#"><i class="fab fa-facebook" style="color: #f5c518;"></i></a>
+                    </div>
+                    <p class="mt-3 small text-secondary mb-0">
+                        <i class="fas fa-envelope me-1"></i> hello@cinenest.film
+                    </p>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25 my-4">
+            <div class="row">
+                <div class="col-12 text-center small text-secondary">
+                    © 2025 CineNest — crafted with <i class="fas fa-heart" style="color: #f5c518;"></i> for movie lovers.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (for collapse etc) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- tiny extra style to make 5-col work for xl -->
+    <style>
+        /* custom 5 equal columns (20%) for xl breakpoint */
+        .col-xl-2-4, .col-xxl-2-4 {
+            flex: 0 0 auto;
+            width: 100%;
+        }
+        @media (min-width: 1200px) {
+            .col-xl-2-4 {
+                width: 20%;
+            }
+        }
+        @media (min-width: 1400px) {
+            .col-xxl-2-4 {
+                width: 20%;
+            }
+        }
+        /* guarantee cards have same height */
+        .movie-card {
+            height: 100%;
+        }
+        /* small fix for cast row uniformity */
+        .cast-row .movie-card .movie-img {
+            height: 200px;
+        }
+    </style>
+</body>
+</html>

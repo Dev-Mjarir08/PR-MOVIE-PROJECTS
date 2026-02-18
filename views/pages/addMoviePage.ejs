@@ -1,0 +1,83 @@
+<%- include('../partials/header') %>
+
+<div class="page-wrapper">
+    <div class="container-fluid py-4">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+
+                <div class="card shadow-lg border-0 rounded-4">
+                    
+                    <div class="card-header bg-dark text-white text-center rounded-top-4">
+                        <h3 class="mb-0">🎬 Add New Movie</h3>
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <form method="post" action="/admin/addMovie" enctype="multipart/form-data">
+
+                            <!-- Movie Title -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Movie Title</label>
+                                <input 
+                                    type="text" 
+                                    name="title" 
+                                    class="form-control form-control-lg" 
+                                    placeholder="Enter Movie Title" 
+                                    required>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Rating</label>
+                                <select class="form-select form-select-lg" name="rating" required>
+                                    <option value="">Select Rating</option>
+                                    <option value="1">⭐ 1 Star</option>
+                                    <option value="2">⭐⭐ 2 Stars</option>
+                                    <option value="3">⭐⭐⭐ 3 Stars</option>
+                                    <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                                    <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                                </select>
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Movie Poster</label>
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    class="form-control" 
+                                    required>
+                            </div>
+
+                            <!-- About -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">About Movie</label>
+                                <textarea 
+                                    class="form-control" 
+                                    name="about" 
+                                    rows="4" 
+                                    placeholder="Write short description about movie..."
+                                    required></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary 
+                                btn-lg rounded-3">
+                                    ➕ Add Movie
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
