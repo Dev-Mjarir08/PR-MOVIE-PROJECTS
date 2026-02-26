@@ -227,3 +227,24 @@ GitHub: <a href="https://github.com/Dev-Mjarir08">Dev-Mjarir08</a>
 <h2>📜 License</h2>
 
 <p>MIT License</p>
+
+<div align="center">
+<img width="1891" height="983" alt="Screenshot 2026-02-26 110620" src="https://github.com/user-attachments/assets/38f964e8-095c-4472-b473-6e0b70510ba7" style="width: 80%; max-width: 800px; border-radius: 12px;"
+ />
+<img  alt="Screenshot 2026-02-26 110620"src="https://github.com/user-attachments/assets/a03211b2-e796-4d05-89a5-8f0a8334276b"style="width: 80%; max-width: 800px; border-radius: 12px;"
+ />
+  <img  alt="Screenshot 2026-02-26 110620" src="https://github.com/user-attachments/assets/5935e4b3-b247-411a-aa58-32423304b323" style="width: 80%; max-width: 800px; border-radius: 12px;"
+ />
+    <img  alt="Screenshot 2026-02-26 110620" src="https://github.com/user-attachments/assets/1d9db718-5a07-4993-ba0a-f0c31941ffde" style="width: 80%; max-width: 800px; border-radius: 12px;"
+ />
+      <img  alt="Screenshot 2026-02-26 110620" src="https://github.com/user-attachments/assets/3b058bd3-2057-4b92-9adc-6e10d9d725be" style="width: 80%; max-width: 800px; border-radius: 12px;"
+ />
+</div>
+
+
+
+
+
+
+
+ 
